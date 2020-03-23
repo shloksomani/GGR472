@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Week 8</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+        .legend {
+            background-color: #fff;
+            border-radius: 3px;
+            bottom: 30px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            font: 24px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            padding: 20px;
+            position: absolute;
+            right: 10px;
+            z-index: 1;
+        }
+
+        .legend h4 {
+            margin: 0 0 10px;
+        }
+
+        .legend div span {
+            /* border-radius: 50%; */
+            height: 5px;
+            width: 5px;
+
+
+            display: inline-block;
+            height: 20px;
+            margin-right: 5px;
+            width: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map' class='map'> </div>
+    <div id='legend' class='legend'>
+        <h4>Median Income</h4> <!-- Legend title -->
+        <div><span style="background-color: #edf8fb"></span>$0/no data</div>
+        <!-- a 'subdivision showing a colored circle and then text describing it' -->
+        <div><span style="background-color: #b2e2e2"></span>$30,000</div>
+        <div><span style="background-color: #66c2a4"></span>$50,000</div>
+        <div><span style="background-color: #2ca25f"></span>$70,000</div>
+        <div><span style="background-color: #006d2c"></span>$80,000</div>
+    </div>
+    <script src='week8.js'></script>
+</body>
+
+</html>

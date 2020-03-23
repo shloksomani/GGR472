@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lab 3</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+
+        .legend {
+            background-color: #909397;
+            border-radius: 3px;
+            bottom: 30px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            font: 24px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            padding: 20px;
+            position: absolute;
+            right: 10px;
+            z-index: 1;
+        }
+
+        .legend h4 {
+            margin: 0 0 10px;
+            font-size: 20px;
+        }
+
+        .legend div span {
+            border-radius: 50%;
+            /* height: 5px;
+            width: 5px; */
+            display: inline-block;
+            height: 20px;
+            margin-right: 5px;
+            width: 20px;
+            justify-content: center;
+
+        }
+
+        button {
+            all: unset;
+            cursor: pointer;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map' class='map'> </div>
+    <div id='legend' class='legend'>
+        <h4><button id="title-legend" onclick="changeLegends()">Population <br>by Dissemination</button></h4>
+        <!-- Legend title -->
+        <div><span style="background-color: #ffffd4" id="legend-1-div"></span><button id="legend-1"
+                onclick="below(1)">Below 423</button></div>
+        <!-- a 'subdivision showing a colored circle and then text describing it' -->
+        <div><span style="background-color: #fed98e" id="legend-2-div"></span><button id="legend-2"
+                onclick="below(2)">423-508</button></div>
+        <div><span style="background-color: #fe9929" id="legend-3-div"></span><button id="legend-3"
+                onclick="below(3)">508-609</button></div>
+        <div><span style="background-color: #d95f0e" id="legend-4-div"></span><button id="legend-4"
+                onclick="below(4)">609-888</button></div>
+        <div><span style="background-color: #993404" id="legend-5-div"></span><button id="legend-5"
+                onclick="below(5)">Above 888</button></div>
+    </div>
+    <script src='lab3.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
+</body>
+
+</html>
