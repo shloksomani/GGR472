@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.legend {
+  background-color: #909397;
+  border-radius: 3px;
+  bottom: 30px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font: 24px/15px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 20px;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+}
+
+.legend h4 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.legend div span {
+  border-radius: 50%;
+  /* height: 5px;
+            width: 5px; */
+  display: inline-block;
+  height: 20px;
+  margin-right: 5px;
+  width: 20px;
+  justify-content: center;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 10px;
+  vertical-align: middle;
+}
+
+#menu {
+  background: #fff;
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  right: 50px;
+  border-radius: 3px;
+  width: 120px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  font-family: "Open Sans", sans-serif;
+}
+
+#menu a {
+  font-size: 13px;
+  color: #404040;
+  display: block;
+  margin: 0;
+  padding: 0;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+#menu a:last-child {
+  border: none;
+}
+
+#menu a:hover {
+  background-color: #f8f8f8;
+  color: #404040;
+}
+
+#menu a.active {
+  background-color: #3887be;
+  color: #ffffff;
+}
+
+#menu a.active:hover {
+  background: #3074a4;
+}
+
+@media screen and (max-width: 600px) {
+  .map {
+  }
+
+  .legend {
+    bottom: 15px;
+  }
+
+  .legend,
+  .legend h4,
+  .legend div span {
+    font-size: 10px;
+  }
+
+  button {
+    font-size: 15px;
+    word-spacing: 1px;
+    vertical-align: middle;
+  }
+}
