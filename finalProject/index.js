@@ -150,8 +150,11 @@ map.on("mouseleave", "DA-layer", function(e) {
   map.getCanvas().style.cursor = "pointer"; //go back to the null cursor
 });
 
+map.on("mousedown", function(e) {
+  popup.remove();
+});
 // NEXT DEFINE WHEN YOU WANT THE POPUP TO HAPPEN
-map.on("mousedown", "DA-layer", function(e) {
+map.on("click", "DA-layer", function(e) {
   popup.remove(); //If a popup already exists, get rid of it!
 
   // let lButton = detectLeftButton(e);
@@ -222,7 +225,7 @@ let toggleableLayerIds = ["supermarketIds", "fastFoodIds"];
 for (let i = 0; i < toggleableLayerIds.length; i++) {
   let id = toggleableLayerIds[i];
 
-  let link = document.createElement("a");
+  let link = document.createElement("button");
   link.href = "#";
   link.className = "active";
   link.textContent = id;
