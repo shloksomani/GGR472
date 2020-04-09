@@ -281,10 +281,14 @@ h2 {
     width: 15px;
   }
 
+  .legends button {
+    color: white;
+  }
   button {
     font-size: small;
     word-spacing: 1px;
     vertical-align: middle;
+    color: white;
   }
 
   #title-legend {
