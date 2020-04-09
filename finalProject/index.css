@@ -282,13 +282,13 @@ h2 {
   }
 
   .legends button {
-    color: white;
+    color: #ffffff;
   }
   button {
     font-size: small;
     word-spacing: 1px;
     vertical-align: middle;
-    color: white;
+    color: #ffffff;
   }
 
   #title-legend {
