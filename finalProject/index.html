@@ -2,40 +2,119 @@
 <html>
 
 <head>
-    <meta charset=utf-8 />
-    <title>Final Project</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
-    <link rel="stylesheet" href="index.css">
+  <meta charset=utf-8 />
+  <title>Final Project</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <div id="wrapper">
-        <div id="menu"></div>
-        <div id='map' class='map'> </div>
-        <div id='legend' class='legend'>
-            <h4><button id="title-legend" onclick="changeLegends()">Population <br>by Dissemination</button>
-            </h4>
-            <!-- Legend title -->
-            <div><span style="background-color: #ffffd4" id="legend-1-div"></span><button id="legend-1"
-                    onclick="below(1)">Below 423</button></div>
-            <!-- a 'subdivision showing a colored circle and then text describing it' -->
-            <div><span style="background-color: #fed98e" id="legend-2-div"></span><button id="legend-2"
-                    onclick="below(2)">423-508</button></div>
-            <div><span style="background-color: #fe9929" id="legend-3-div"></span><button id="legend-3"
-                    onclick="below(3)">508-609</button></div>
-            <div><span style="background-color: #d95f0e" id="legend-4-div"></span><button id="legend-4"
-                    onclick="below(4)">609-888</button></div>
-            <div><span style="background-color: #993404" id="legend-5-div"></span><button id="legend-5"
-                    onclick="below(5)">Above 888</button></div>
-        </div>
+
+  <div class="title">
+    <h2>Title</h2>
+  </div>
+  <div class="grid-container">
+    <div class="map" id='map'>
+      <div id="menu"></div>
 
     </div>
-    <script src="hover.js"></script>
-    <script src='index.js'></script>
-    <script src="legendsManipulation.js"></script>
-    <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
+    <div class="grid-item grid-item-3">
+      <div class="grid3title">
+        <b><i>Legends</i></b>
+        <div class="info">
+          <img src="information.svg" stroke="white" class="info" alt="information">
+        </div>
+
+      </div>
+      <div id='legend' class='legend'>
+        <p><button id="title-legend" onclick="changeLegends(1)">Income</button>
+        </p>
+
+        <div><span style="background-color: #edf8fb" id="legend-1-div"></span><button id="legend-1"
+            onclick="below(1, 1)">Below $56,640
+          </button></div>
+
+        <div><span style="background-color: #b2e2e2" id="legend-2-div"></span><button id="legend-2"
+            onclick="below(1, 2)">$56,640-$79,616</button></div>
+        <div><span style="background-color: #66c2a4" id="legend-3-div"></span><button id="legend-3"
+            onclick="below(1, 3)">$79,616-$115,456</button></div>
+        <div><span style="background-color: #2ca25f" id="legend-4-div"></span><button id="legend-4"
+            onclick="below(1, 4)">$115,456-$184,661</button></div>
+        <div><span style="background-color: #006d2c" id="legend-5-div"></span><button id="legend-5"
+            onclick="below(1, 5)">Above $184,661
+          </button></div>
+
+
+      </div>
+
+
+      <div id='legend' class='legend'>
+        <p><button id="title-legend" onclick="changeLegends(2)">Education</button>
+        </p>
+
+        <div><span style="background-color: #ffffd4" id="legend-1-div"></span><button id="legend-1"
+            onclick="below(2, 1)">Below
+            450</button></div>
+
+        <div><span style="background-color: #fed98e" id="legend-2-div"></span><button id="legend-2"
+            onclick="below(2, 2)">450-800</button></div>
+        <div><span style="background-color: #fe9929" id="legend-3-div"></span><button id="legend-3"
+            onclick="below(2, 3)">800-1150</button></div>
+        <div><span style="background-color: #d95f0e" id="legend-4-div"></span><button id="legend-4"
+            onclick="below(2, 4)">1150-1590</button></div>
+        <div><span style="background-color: #993404" id="legend-5-div"></span><button id="legend-5"
+            onclick="below(2, 5)">Above
+            1590</button></div>
+      </div>
+
+
+      <div id='legend' class='legend'>
+        <p><button id="title-legend" onclick="changeLegends(3)">Avg. Age</button>
+        </p>
+
+        <div><span style="background-color: #fef0d9" id="legend-1-div"></span><button id="legend-1"
+            onclick="below(3, 1)">Below
+            38.0</button></div>
+
+        <div><span style="background-color: #fdcc8a" id="legend-2-div"></span><button id="legend-2"
+            onclick="below(3, 2)">38.0-41.9</button></div>
+        <div><span style="background-color: #fc8d59" id="legend-3-div"></span><button id="legend-3"
+            onclick="below(3, 3)">419-46.9</button></div>
+        <div><span style="background-color: #e34a33" id="legend-4-div"></span><button id="legend-4"
+            onclick="below(3, 4)">46.9-80.1</button></div>
+        <div><span style="background-color: #b30000" id="legend-5-div"></span><button id="legend-5"
+            onclick="below(3, 5)">Above 80.1</button></div>
+      </div>
+
+
+
+      <div class="supermarket">
+        <span style="background-color: #5395F9" id="supermarket"></span>
+        <button id="legendSupermarket" onclick="addRemovePoints('supermarketIds')">Supermarket</button>
+      </div>
+      <div class="fastFood">
+        <span style="background-color: rgb(3, 252, 53)" id="fastFood"></span>
+        <button onclick="addRemovePoints('fastFoodIds')">Fast Food</button>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer">
+    <h2>Footer</h2>
+  </div>
+
+
+
+  <script src="hover.js"></script>
+  <script src='index.js'></script>
+  <script src="legendsManipulation.js"></script>
+  <script src="legendsButton.js"></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/turf/v3.0.11/turf.min.js'></script>
+
 </body>
 
 </html>
