@@ -1,5 +1,5 @@
 // Legends manipulation
-
+// Dynamically changes the map when clicked on certain legends
 let currentLegend;
 let selectedBound;
 
@@ -114,7 +114,6 @@ const below = (layerNumber, selctedFilter) => {
 // the function fills the appropriate layers
 changeLegends = (layerNumber) => {
   if (layerNumber == 1) {
-    console.log("in legend 1");
     layerId = "medIncomeLayer";
     map.setPaintProperty("torontoDensityLayer", "fill-opacity", 0);
     map.setPaintProperty("medRentLayer", "fill-opacity", 0);
@@ -129,7 +128,6 @@ changeLegends = (layerNumber) => {
     map.setPaintProperty("visminLayer", "fill-opacity", 0);
     map.setFilter(layerId);
   } else if (layerNumber == 3) {
-    console.log("in legend 3");
     layerId = "medRentLayer";
     map.setPaintProperty("torontoDensityLayer", "fill-opacity", 0);
     map.setPaintProperty("medRentLayer", "fill-opacity", 0.8);
@@ -137,11 +135,11 @@ changeLegends = (layerNumber) => {
     map.setPaintProperty("visminLayer", "fill-opacity", 0);
     map.setFilter(layerId);
   } else if (layerNumber == 4) {
-    layerID = "visminLayer";
+    let thisLayer = "visminLayer";
     map.setPaintProperty("torontoDensityLayer", "fill-opacity", 0);
     map.setPaintProperty("medRentLayer", "fill-opacity", 0);
     map.setPaintProperty("medIncomeLayer", "fill-opacity", 0);
     map.setPaintProperty("visminLayer", "fill-opacity", 0.8);
-    map.setFilter(layerId);
+    map.setFilter(thisLayer);
   }
 };

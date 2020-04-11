@@ -15,20 +15,34 @@
 
 <body>
 
+
   <div class="title">
     Mapping Food Access in Toronto<br>
-    <h5>Median Household Income, Population Density per sq.km, Median Rent Price, Visible Minority Density per sq.km.<br>
+    <h5>Median Household Income, Population Density per sq.km, Median Rent Price, Visible Minority Density per
+      sq.km.<br>
       By Census Tract, 2016.</h5><br>
+
   </div>
   <div class="grid-container">
     <div class="map" id='map'>
       <div id="menu"></div>
 
     </div>
+    <div class="dataRendered">
+      <div class="renderTitle">
+        <b><i>Reference: Census (2016)This map illustrates the following:</i></b>
+      </div>
+      <div class="renderText start">
+        Click on the map to see the live data....<br><br>
+      </div>
+      <div class="info" data-tooltip="Click on the map to see some magic here">
+        <img src="information.svg" stroke="white" class="info" alt="information">
+      </div>
+    </div>
     <div class="grid-item grid-item-3">
       <div class="grid3title">
         <b><i>Legends</i></b>
-        <div class="info">
+        <div class="info" data-tooltip="Click on a legend to see the data displayed">
           <img src="information.svg" stroke="white" class="info" alt="information">
         </div>
 
@@ -130,14 +144,7 @@
 
 
     </div>
-    <div class="dataRendered">
-      <div class="renderTitle">
-        <b><i>Census Selection</i></b>
-      </div>
-      <div class="renderText start">
-        Click on the map to see the live data....<br><br>
-      </div>
-    </div>
+
   </div>
   <div class="footer">
     <h2>GGR472</h2>
@@ -148,8 +155,9 @@
 
   <script src="hover.js"></script>
   <script src='index.js'></script>
-  <script src="legendsManipulation.js"></script>
+
   <script src="legendsButton.js"></script>
+  <script src="legendsManipulation.js"></script>
   <script src="./fastfoodplaces.geojson"></script>
   <script src="./supermarkets_shoppers.geojson"></script>
 
