@@ -2,32 +2,34 @@ body {
   margin: 0;
   padding: 0;
   background-color: #1e1e1e;
+  font-family: "Merriweather", serif;
 }
-
 h2 {
   font-family: "Merriweather", serif;
 }
 
 .title {
   width: 100%;
+  font-size: 18px;
   justify-content: center;
   text-align: center;
   color: #ffffff;
+  margin-top: 1em;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: 3.5fr 0.5fr;
-  grid-template-rows: minmax(85vh, auto);
+  grid-template-rows: 75vh auto;
   grid-gap: 20px;
   justify-items: stretch;
   align-items: stretch;
 }
 
 .map {
-  margin: 2em;
+  margin: 1em;
+  grid-row: span 2;
   position: relative;
-
   border-radius: 15px;
   background: #1e1e1e;
   box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #232323;
@@ -36,10 +38,9 @@ h2 {
 .grid-item-3 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 220px;
   grid-template-rows: 20px 220px;
-  grid-gap: 10px;
-  margin: 1em;
+  grid-gap: 5px;
+  margin-top: 1em;
   border-radius: 15px;
   background: #1e1e1e;
   box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #232323;
@@ -51,6 +52,39 @@ h2 {
   font-size: 18px;
   color: #ffffff;
   position: relative;
+  font-family: "Merriweather", serif;
+}
+
+.dataRendered {
+  /* grid-column: span 2; */
+  grid-column: 2/3;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  color: white;
+
+  border-radius: 15px;
+  background: #1e1e1e;
+  box-shadow: 5px 5px 10px #1a1a1a, -5px -5px 10px #232323;
+}
+
+.renderTitle {
+  text-align: center;
+  font-size: 15px;
+  font-family: "Merriweather", serif;
+}
+
+.renderText {
+  text-align: center;
+  font-size: 12px;
+  margin: 10px;
+}
+
+.start {
+  text-align: center;
+  opacity: 0.5;
 }
 
 .info {
@@ -107,7 +141,7 @@ h2 {
 
 .legend {
   position: relative;
-  font: 24px/15px "Open Sans", sans-serif;
+  font: 24px/15px "Merriweather", serif;
   padding: 10px;
   z-index: 1;
   height: 200px;
@@ -119,6 +153,7 @@ h2 {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  color: white;
 }
 
 .legend div {
@@ -148,7 +183,7 @@ h2 {
 .legend button {
   all: unset;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 12px;
   /* margin-bottom: 10px; */
   vertical-align: middle;
   color: #ffffff;
@@ -181,7 +216,8 @@ h2 {
 .fastFood button {
   all: unset;
   cursor: pointer;
-  font-size: 15px;
+  font-family: "Merriweather", serif;
+  font-size: 12px;
   /* margin-bottom: 10px; */
   vertical-align: middle;
   color: #ffffff;
@@ -196,7 +232,7 @@ h2 {
 }
 
 #title-legend {
-  font-size: 16px;
+  text-align: center;
   word-spacing: 2px;
   line-height: 1.2;
 }
@@ -207,7 +243,12 @@ h2 {
   z-index: 1;
   top: 10px;
   right: 50px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Merriweather", serif;
+}
+
+.supermarketIds,
+.fastFoodIds {
+  color: white;
 }
 
 #menu button {
@@ -250,12 +291,31 @@ h2 {
 }
 
 @media screen and (max-width: 750px) {
+  .title {
+    font-size: 12px;
+  }
   .grid-container {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(80vh, auto);
+    grid-template-rows: minmax(70vh, auto);
+  }
+
+  .map {
+    grid-column: 1/3;
+  }
+
+  .dataRendered {
+    grid-row: 3;
+    grid-column: span 2;
+    margin: 1em;
+    font-size: 12px;
+  }
+
+  .renderTitle {
+    font-size: 13px;
   }
 
   .grid-item-3 {
+    grid-column: span 2;
     grid-template-columns: 1fr;
     /* grid-auto-rows: 120px; */
     grid-template-rows: 60px repeat(3, auto) 60px 60px;
@@ -263,6 +323,7 @@ h2 {
 
   .grid3title {
     grid-column: span 1;
+    font-size: 13px;
   }
   .legend {
     bottom: 35px;
@@ -283,16 +344,17 @@ h2 {
 
   .legends button {
     color: #ffffff;
+    font-size: 12px;
   }
   button {
-    font-size: small;
+    font-size: 12px;
     word-spacing: 1px;
     vertical-align: middle;
     color: #ffffff;
   }
 
   #title-legend {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   #menu {

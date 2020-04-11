@@ -1,21 +1,12 @@
-hover = (event, layer, layerId, sourceLayer, id) => {
-  //get the rendered features that belong to the provinces-fill layer
+// takes care of all the hover functionality of the points
+hover = (event, layer, layerId, id) => {
   let features = map.queryRenderedFeatures(event.point, {
     layers: [layerId],
   });
-
-  // console.log(event.features);
-
-  //   console.log("line 83");
-
-  //if there is a feature there, do the following
   if (event.features.length > 0) {
-    // console.log(features[0]); //print out the first element of the features array that was selected
-    // console.log("line 90");
     if (id) {
       map.removeFeatureState({
         source: layer,
-        sourceLayer: sourceLayer,
         id: id,
       });
     }
@@ -23,7 +14,6 @@ hover = (event, layer, layerId, sourceLayer, id) => {
     map.setFeatureState(
       {
         source: layer,
-        sourceLayer: sourceLayer,
         id: id,
       },
       {

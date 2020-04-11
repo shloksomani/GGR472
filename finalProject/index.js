@@ -1,3 +1,4 @@
+// mapbox token setup
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic2hsb2tzb21hbmkiLCJhIjoiY2s1NGpqczNwMGs0ajNucXZmd2JrZm8xMyJ9.gkbVhtrQBRhiOJrUf6ZO8g";
 let map = new mapboxgl.Map({
@@ -7,20 +8,15 @@ let map = new mapboxgl.Map({
   zoom: 11,
 });
 
+// navigation control
 let nav1 = new mapboxgl.NavigationControl();
 map.addControl(nav1, "top-right");
 
-let filterDay = [["to-number", ["get", "CVtJ54BL17Pv_data_COL3"]], 0];
-
-console.log(filterDay);
-
 map.on("style.load", function () {
-  let layers = map.getStyle().layers;
-
+  // to add the layers at a specific position
   let previousInShapeType = "pitch-outline";
 
-  //Normal add source code
-
+  //Median income
   map.addSource("medIncome", {
     type: "vector",
     url: "mapbox://shloksomani.5rot2sos",
@@ -55,6 +51,26 @@ map.on("style.load", function () {
     },
     previousInShapeType
   );
+  //
+
+  // Boundary file
+  map.addSource("boundary", {
+    type: "vector",
+    url: "mapbox://shloksomani.ayvvc1bs",
+  });
+
+  map.addLayer({
+    id: "boundarylayer",
+    type: "line",
+    source: "boundary",
+    layout: {},
+    paint: {
+      "line-color": "red",
+    },
+    "source-layer": "Wardboundary-5r5wto",
+  });
+
+  // Rent
 
   map.addSource("medRent", {
     type: "vector",
@@ -74,13 +90,13 @@ map.on("style.load", function () {
           ["to-number", ["get", "COL1"], 0],
           0,
           "#feebe2",
-          324995,
+          662.0,
           "#fbb4b9",
-          560551,
+          1076.0,
           "#f768a1",
-          790333,
+          1321.0,
           "#c51b8a",
-          1249662,
+          1649.0,
           "#7a0177",
         ],
         "fill-opacity": 0,
@@ -91,120 +107,88 @@ map.on("style.load", function () {
     previousInShapeType
   );
 
-  // map.addSource("toronto_DAs", {
-  //   type: "vector",
-  //   url: "mapbox://shloksomani.hello-world-tiles",
-  //   // generateId: true
-  // });
+  // Visible Minority Density
 
-  // map.addLayer(
-  //   {
-  //     id: "DA-layer",
-  //     type: "fill",
-  //     source: "toronto_DAs",
-  //     layout: {},
-  //     paint: {
-  //       "fill-color": [
-  //         "interpolate",
-  //         ["linear"],
-  //         ["to-number", ["get", "CVtJ54BL17Pv_data_COL3"], 0], // get a number, but if provided with a non-number default to 0
-  //         0,
-  //         "#ffffd4",
-  //         423,
-  //         "#fed98e",
-  //         508,
-  //         "#fe9929",
-  //         609,
-  //         "#d95f0e",
-  //         888,
-  //         "#993404",
-  //       ],
-  //       "fill-opacity": 0.8,
-  //       "fill-outline-color": "black",
-  //     },
-  //     "source-layer": "hello_world",
-  //   },
-  //   previousInShapeType
-  // );
-
-  // Age
-  map.addSource("torontoAvgAge", {
+  map.addSource("visminDensity", {
     type: "vector",
-    url: "mapbox://shloksomani.bmkpjbh9",
+    url: "mapbox://shloksomani.duz3tcag",
   });
 
   map.addLayer(
     {
-      id: "avgAgeLayer",
+      id: "visminLayer",
       type: "fill",
-      source: "torontoAvgAge",
+      source: "visminDensity",
       layout: {},
       paint: {
         "fill-color": [
           "interpolate",
           ["linear"],
-          ["to-number", ["get", "COL1"], 0],
-          0,
-          "#fef0d9",
-          38.0,
-          "#fdcc8a",
-          41.9,
-          "#fc8d59",
-          46.9,
-          "#e34a33",
-          80.1,
-          "#b30000",
-        ],
-        "fill-opacity": 0,
-        "fill-outline-color": "black",
-      },
-      "source-layer": "average_age_final_zip-6u1h6h",
-    },
-    previousInShapeType
-  );
-
-  // education
-  map.addSource("torontoEducation", {
-    type: "vector",
-    url: "mapbox://shloksomani.74dg5njb",
-    // generateId: true
-  });
-
-  map.addLayer(
-    {
-      id: "education",
-      type: "fill",
-      source: "torontoEducation",
-      layout: {},
-      paint: {
-        "fill-color": [
-          "interpolate",
-          ["linear"],
-          ["to-number", ["get", "COL2"], 0], // get a number, but if provided with a non-number default to 0
+          ["to-number", ["get", "vismin_den"], 0],
           0,
           "#ffffd4",
-          450,
+          2642,
           "#fed98e",
-          800,
+          6134,
           "#fe9929",
-          1150,
+          13012,
           "#d95f0e",
-          1590,
+          31667,
           "#993404",
         ],
         "fill-opacity": 0,
         "fill-outline-color": "black",
       },
-      "source-layer": "education_final-2lp0zc",
+      "source-layer": "visible_2016-4q1rw1",
     },
     previousInShapeType
   );
 
-  //supermarkets
-  map.addSource("supermarkets", {
+  // Population Density
+
+  map.addSource("torontoDensity", {
     type: "vector",
-    url: "mapbox://shloksomani.5ghlt0vu",
+    url: "mapbox://shloksomani.4jftxi3r",
+  });
+
+  map.addLayer(
+    {
+      id: "torontoDensityLayer",
+      type: "fill",
+      source: "torontoDensity",
+      layout: {},
+      paint: {
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["to-number", ["get", "density"], 0],
+          0,
+          "#ffffcc",
+          2908,
+          "#a1dab4",
+          4586,
+          "#41b6c4",
+          6479,
+          "#2c7fb8",
+          9462,
+          "#253494",
+        ],
+        "fill-opacity": 0,
+        "fill-outline-color": "black",
+      },
+      "source-layer": "population_density_final2-84b8ty",
+    },
+    previousInShapeType
+  );
+
+  //supermarkets points
+  map.addSource("supermarkets", {
+    type: "geojson",
+    data: supermarketgeojson,
     generateId: true,
+    cluster: true, //use the cluster function available for geojson points
+    clusterMaxZoom: 12,
+    clusterRadius: 10,
   });
 
   map.addLayer({
@@ -222,25 +206,20 @@ map.on("style.load", function () {
         ["interpolate", ["linear"], ["get", "mag"], 1, 10],
         4,
       ],
-
-      // The feature-state dependent circle-color expression will render
-      // the color according to its magnitude when
-      // a feature's hover state is set to true
-      "circle-color": "#5395F9",
+      "circle-color": "#FFD700",
     },
-
-    "source-layer": "supermarkets_shoppers-3ddt6h",
   });
 
   //
 
-  //
-
-  //Fast Food
+  //Fast Food points
   map.addSource("fastFood", {
-    type: "vector",
-    url: "mapbox://shloksomani.cc2kvvcx",
-    // generateId: true
+    type: "geojson",
+    data: fastfood,
+    generateId: true,
+    cluster: true, //use the cluster function available for geojson points
+    clusterMaxZoom: 12,
+    clusterRadius: 8,
   });
 
   map.addLayer({
@@ -259,28 +238,8 @@ map.on("style.load", function () {
         4,
       ],
       "circle-color": "rgb(3, 252, 53)",
-      // The feature-state dependent circle-color expression will render
-      // the color according to its magnitude when
-      // a feature's hover state is set to true
     },
-
-    "source-layer": "fastfood-0hume6",
   });
-
-  // map.addLayer(
-  //   {
-  //     id: "fastFoodOutline",
-  //     type: "circle",
-  //     source: "fastFood",
-  //     "source-layer": "fastfood-0hume6",
-  //     layout: {},
-  //     paint: {
-  //       "circle-color": "white",
-  //       "circle-radius": 5,
-  //     },
-  //   },
-  //   "fastFoodIds"
-  // );
 });
 
 // Popups
@@ -290,15 +249,15 @@ let popup = new mapboxgl.Popup({
 });
 
 // if the mouse enters the province fill layer then do the following:
-map.on("mouseenter", "education", function (e) {
+map.on("mouseenter", "medIncomeLayer", function (e) {
   map.getCanvas().style.cursor = "crosshair"; //make the mouse cursor pointy
 });
 // if the mouse leaves the province fill layer then do the following:
-map.on("mouseleave", "education", function (e) {
+map.on("mouseleave", "medIncomeLayer", function (e) {
   map.getCanvas().style.cursor = "pointer"; //go back to the null cursor
 });
 
-map.on("click", "education", function (e) {
+map.on("mousemove", "medIncomeLayer", function (e) {
   popup.remove();
 
   var fastFoodsPopup = map.queryRenderedFeatures(e.point, {
@@ -310,8 +269,6 @@ map.on("click", "education", function (e) {
   });
 
   if (fastFoodsPopup.length > 0) {
-    console.log(fastFoodsPopup[0]);
-
     var featureSelectFF = fastFoodsPopup[0];
     popup.setLngLat(e.lngLat);
 
@@ -322,7 +279,7 @@ map.on("click", "education", function (e) {
   }
 
   if (supermarketsPopup.length > 0) {
-    console.log(supermarketsPopup[0]);
+    // console.log(supermarketsPopup[0]);
 
     var featureSelectSM = supermarketsPopup[0];
     popup.setLngLat(e.lngLat);
@@ -332,97 +289,7 @@ map.on("click", "education", function (e) {
     );
     popup.addTo(map);
   }
-
-  // let lButton = detectLeftButton(e);
-  // if (e.originalEvent.button != 0) {
-  //   popup.remove();
-  //   return 0;
-  // }
 });
-
-// map.on("click", "education", function (e) {
-//   popup.remove(); //If a popup already exists, get rid of it!
-
-//   var supermarketsPopup = map.queryRenderedFeatures(e.point, {
-//     layers: ["supermarketIds"],
-//   });
-
-//   if (supermarketsPopup.length > 0) {
-//     console.log(supermarketsPopup[0]);
-
-//     var featureSelectSM = supermarketsPopup[0];
-//     popup.setLngLat(e.lngLat);
-
-//     popup.setHTML(
-//       `<b>This supermarket is a ${featureSelectSM.properties.SUPERMARKE}.</b>`
-//     );
-//     popup.addTo(map);
-//   }
-
-//   // let lButton = detectLeftButton(e);
-//   if (e.originalEvent.button != 0) {
-//     popup.remove();
-//     return 0;
-//   }
-
-//   //get the rendered features that belong to the provinces-fill layer
-//   // let features = map.queryRenderedFeatures(e.point, {
-//   //   layers: ["DA-layer"],
-//   // });
-
-//   // let features = map.queryRenderedFeatures(e.point, {
-//   //   layers: ["education"],
-//   // });
-
-//   // console.log(e.features);
-
-//   // console.log(features[0].properties);
-
-//   // console.log(features1[0].properties["6pVtQBirMw_data_COL6"]);
-
-//   // let area;
-//   // let polygon;
-//   // // console.log(features[0].geometry.coordinates[0].length);
-//   // if (features[0].geometry.coordinates[0].length >= 4) {
-//   //   polygon = turf.polygon([features[0].geometry.coordinates[0]]);
-//   //   area = turf.area(polygon);
-//   // } else {
-//   //   polygon = turf.multiPolygon([features[0].geometry.coordinates[0]]);
-//   //   area = turf.area(polygon);
-//   // }
-
-//   // console.log(area);
-
-//   //if there is a feature there, do the following
-//   // if (features.length > 0) {
-//   //   // console.log(features[0]); //print out the first element of the features array that was selected
-//   //   let feature = features[0]; //store the first element as 'feature'
-//   //   popup.setLngLat(e.lngLat); //place the popup window at the lng and lat where your click event happened
-//   //   //add stuff to the pop up:
-//   //   popup.setHTML(
-//   //     "The <b> Dissemination </b>area id: " +
-//   //       features[0].properties.DAUID +
-//   //       "<br>" +
-//   //       "and the <b>area</b> is: " +
-//   //       "<b>" +
-//   //       area +
-//   //       "</b>" +
-//   //       "<br>" +
-//   //       "The Avg Income statistics for the population aged 15 years and over in private households in this area is: $" +
-//   //       "<b>" +
-//   //       features1[0].properties["6pVtQBirMw_data_COL6"] +
-//   //       "</b>" +
-//   //       "<br>" +
-//   //       "More information can be found here about the income and Dissemination area " +
-//   //       "<a href=https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110023901&pickMembers%5B0%5D=1.1&pickMembers%5B1%5D=2.1&pickMembers%5B2%5D=3.1&pickMembers%5B3%5D=4.1 target=_blank>Link</a>"
-//   //   );
-//   // popup.addTo(map); //finally add the pop up to the map
-//   // } else {
-//   //   console.log("no features from layer here...");
-//   // }
-// });
-
-//
 
 //
 
@@ -430,13 +297,7 @@ var marketID = null;
 
 map.on("mousemove", "supermarketIds", function (e) {
   // popup.remove(); //If a popup already exists, get rid of it!
-  marketID = hover(
-    e,
-    "supermarkets",
-    "supermarketIds",
-    "supermarkets_shoppers-3ddt6h",
-    marketID
-  );
+  marketID = hover(e, "supermarkets", "supermarketIds", marketID);
 });
 
 map.on("mouseleave", "supermarketIds", function (e) {
@@ -444,7 +305,6 @@ map.on("mouseleave", "supermarketIds", function (e) {
     map.setFeatureState(
       {
         source: "supermarkets",
-        sourceLayer: "supermarkets_shoppers-3ddt6h",
         id: marketID,
       },
       {
@@ -461,7 +321,7 @@ var ffId = null;
 
 map.on("mousemove", "fastFoodIds", function (e) {
   // popup.remove(); //If a popup already exists, get rid of it!
-  ffId = hover(e, "fastFood", "fastFoodIds", "fastfood-0hume6", ffId);
+  ffId = hover(e, "fastFood", "fastFoodIds", ffId);
 });
 
 map.on("mouseleave", "fastFoodIds", function (e) {
@@ -469,7 +329,6 @@ map.on("mouseleave", "fastFoodIds", function (e) {
     map.setFeatureState(
       {
         source: "fastFood",
-        sourceLayer: "fastfood-0hume6",
         id: ffId,
       },
       {
@@ -479,7 +338,6 @@ map.on("mouseleave", "fastFoodIds", function (e) {
     ffId = null;
   }
 });
-//
 
 let toggleableLayerIds = ["supermarketIds", "fastFoodIds"];
 
@@ -522,3 +380,240 @@ map.addControl(
     trackUserLocation: true,
   })
 );
+
+//
+//buffer popups
+var tempClickBuffer = null;
+var tempClickBuffer1 = null;
+var tempSprmkts = null;
+let tempff = null;
+let dynamicTitle = document.querySelector(".renderText");
+var popup1 = new mapboxgl.Popup({
+  closeButton: true,
+  closeOnClick: false,
+});
+
+const removelayer = () => {
+  tempClickBuffer = null;
+  tempClickBuffer1 = null;
+  tempSprmkts = null;
+  tempff = null;
+  map.removeLayer("tempClickBufferLayer"); //get rid of the old buffer
+  map.removeSource("tempClickBufferSource"); //get rid of the old selected supermarkets
+
+  map.removeLayer("tempClickBufferLayer1"); //get rid of the old buffer
+  map.removeSource("tempClickBufferSource1"); //get rid of the old selected supermarkets
+
+  map.removeLayer("selectedSprmkts"); //reset source
+  map.removeSource("tempSprmkts"); //reset source
+  map.removeLayer("selectedff"); //reset source
+  map.removeSource("tempff"); //reset source
+};
+
+//when you click the map, do the following.
+//recall 'e' is an event data object: https://www.mapbox.com/mapbox-gl-js/api/#EventData
+map.on("click", "torontoDensityLayer", function (e) {
+  //clean up variables if we've already clicked somewhere else.
+  //check by seeing if there's geojson text in the tempClickBuffer variable
+  // console.log(e);
+  if (tempClickBuffer != null) {
+    tempClickBuffer = null;
+    tempClickBuffer1 = null;
+    tempSprmkts = null;
+    tempff = null;
+    map.removeLayer("tempClickBufferLayer"); //get rid of the old buffer
+    map.removeSource("tempClickBufferSource"); //get rid of the old selected supermarkets
+
+    map.removeLayer("tempClickBufferLayer1"); //get rid of the old buffer
+    map.removeSource("tempClickBufferSource1"); //get rid of the old selected supermarkets
+
+    map.removeLayer("selectedSprmkts"); //reset source
+    map.removeSource("tempSprmkts"); //reset source
+    map.removeLayer("selectedff"); //reset source
+    map.removeSource("tempff"); //reset source
+  }
+
+  //create a point geojson object from the event data - this creates a point where you clicked
+  tempLngLat = [e.lngLat.lng, e.lngLat.lat]; //create an array that looks like: [lng,lat]
+  //make an object that is a 'geojson' object from the point data
+  var tempPt = {
+    type: "Feature",
+    properties: {},
+    geometry: {
+      type: "Point",
+      coordinates: tempLngLat,
+    },
+  };
+
+  //create a buffer using the point geojson you just created, 1 km circular buffer
+  tempClickBuffer = turf.buffer(tempPt, 1, { units: "kilometers" });
+  tempClickBuffer = turf.featureCollection([tempClickBuffer]);
+
+  tempClickBuffer1 = turf.buffer(tempPt, 1, { units: "kilometers" });
+  tempClickBuffer1 = turf.featureCollection([tempClickBuffer1]);
+  //see what supermarkets (from the sprmkt geojson variable) are within the 'tempClickBuffer' geojson object you just created.
+  //this function generates a new featureCollection called 'tempSprmkts', which we will display later
+  tempff = turf.pointsWithinPolygon(fastfood, tempClickBuffer1);
+  tempSprmkts = turf.pointsWithinPolygon(supermarketgeojson, tempClickBuffer);
+
+  var featuresVis = map.queryRenderedFeatures(e.point, {
+    layers: ["visminLayer"],
+  });
+
+  let featuresVisData;
+  if (featuresVis[0]) {
+    featuresVisData = featuresVis[0].properties.vismin_den;
+  } else {
+    featuresVisData = false;
+  }
+  // console.log(featuresVis[0].properties);
+  console.log(featuresVisData);
+  var featureIncome = map.queryRenderedFeatures(e.point, {
+    layers: ["medIncomeLayer"],
+  });
+
+  let featuresIncomeData;
+  if (featureIncome[0]) {
+    featuresIncomeData = featureIncome[0].properties.COL2;
+  } else {
+    featuresIncomeData = false;
+  }
+  var featureRent = map.queryRenderedFeatures(e.point, {
+    layers: ["medRentLayer"],
+  });
+
+  let featuresRentData;
+  if (featureRent[0]) {
+    featuresRentData = featureRent[0].properties.COL1;
+  } else {
+    featuresRentData = false;
+  }
+
+  var featureDensity = map.queryRenderedFeatures(e.point, {
+    layers: ["torontoDensityLayer"],
+  });
+
+  let featuresDensityData;
+
+  if (featureDensity[0]) {
+    featuresDensityData = featureDensity[0].properties.density;
+  } else {
+    featuresDensityData = false;
+  }
+
+  if (tempSprmkts.features.length != null && tempff.features.length != null) {
+    popup1
+      .remove()
+      .setLngLat(e.lngLat)
+      .setHTML(
+        `Within 1km of this buffer, there are ${tempSprmkts.features.length} supermarkets and ${tempff.features.length} fast food restaurants.`
+      )
+      .addTo(map);
+
+    document
+      .querySelector(".mapboxgl-popup-close-button")
+      .addEventListener("click", removelayer);
+
+    dynamicTitle.classList = "renderText";
+    dynamicTitle.innerHTML = `This census tract has: <br> - A median household income of: $${
+      featuresIncomeData ? featuresIncomeData : 0
+    }, <br> - An average rent price of: $${
+      featuresRentData ? featuresRentData : 0
+    },
+     <br> - A population density of: ${
+       featuresDensityData ? featuresDensityData : 0
+     } people per sq.km, <br> - A visible minority and Aboriginal density of: ${
+      featuresVisData ? Math.round(featuresVisData) : 0
+    } people per sq.km.`;
+  } else {
+    dynamicTitle.classList = "renderText";
+    dynamicTitle.innerHTML = "There is no available data here";
+  }
+
+  //center the  map on the point you clicked and zoom in, using 'easeTo' so it is animated
+  map.easeTo({
+    center: e.lngLat, //center on the point you clicked
+    zoom: 12, //zoom to zoom level 12
+    duration: 1000, //take 1000 milliseconds to get there
+  });
+
+  // scroll the window down 100px
+  window.scroll({
+    top: 95,
+    left: 0,
+    behavior: "smooth",
+  });
+
+  //add the source and layer information of the buffer geojson (tempClickBuffer) and
+  //subset of supermarkets geojson (tempSprmkts) objects you created
+  map.addSource("tempSprmkts", {
+    type: "geojson",
+    data: tempSprmkts,
+  });
+  map.addLayer({
+    id: "selectedSprmkts",
+    type: "circle",
+    source: "tempSprmkts",
+    layout: {},
+    paint: {
+      "circle-color": "blue", //make our selected supermarket layer BIGGER BLUE points
+      "circle-radius": 6,
+      "circle-opacity": 1,
+    },
+  });
+
+  map.addSource("tempff", {
+    type: "geojson",
+    data: tempff,
+  });
+  map.addLayer({
+    id: "selectedff",
+    type: "circle",
+    source: "tempff",
+    layout: {},
+    paint: {
+      "circle-color": "red", //make our selected supermarket layer BIGGER BLUE points
+      "circle-radius": 6,
+      "circle-opacity": 1,
+    },
+  });
+
+  map.addSource("tempClickBufferSource", {
+    type: "geojson",
+    data: tempClickBuffer,
+  });
+  map.addLayer(
+    {
+      id: "tempClickBufferLayer",
+      type: "fill",
+      source: "tempClickBufferSource",
+      layout: {},
+      paint: {
+        "fill-color": "white",
+        "fill-opacity": 0.4,
+        "fill-outline-color": "black",
+      },
+    },
+    "selectedSprmkts"
+  );
+
+  map.addSource("tempClickBufferSource1", {
+    type: "geojson",
+    data: tempClickBuffer1,
+  });
+  map.addLayer(
+    {
+      id: "tempClickBufferLayer1",
+      type: "fill",
+      source: "tempClickBufferSource1",
+      layout: {},
+      paint: {
+        "fill-color": "white",
+        "fill-opacity": 0.4,
+        "fill-outline-color": "black",
+      },
+    },
+    "selectedSprmkts"
+  );
+});
+//
